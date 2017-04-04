@@ -36,36 +36,40 @@ namespace WebApi_firstApp.Controllers
             return new ObjectResult(item);
         }
 
-        // GET: api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public IActionResult Create([FromBody] TodoItem item)
         {
+            if (item == null)
+            {
+                return BadRequest();
+            }
+
+            _todoRepository.Add(item);
+
+            return CreatedAtRoute("GetTodo", new { id = item.Key }, item);
         }
 
-        // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public IActionResult Update(long id, [FromBody] TodoItem item)
         {
+            if ((item == null) || (item.Key != id))
+            {
+                return BadRequest();
+            }
+
+            var todo = _todoRepository.Find(id);
+
+            if (todo == null)
+            {
+                return NotFound();
+            }
+
+            todo.IsComplete = item.IsComplete;
+            todo.Name = item.Name;
+
+            _todoRepository.Update(todo);
+            return new NoContentResult();
         }
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

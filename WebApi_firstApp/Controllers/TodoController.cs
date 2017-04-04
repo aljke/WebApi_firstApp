@@ -71,5 +71,18 @@ namespace WebApi_firstApp.Controllers
             return new NoContentResult();
         }
 
+        [HttpDelete("{id}")]
+        public IActionResult Delete(long id)
+        {
+            var todo = _todoRepository.Find(id);
+            if(todo == null)
+            {
+                return NotFound();
+            }
+
+            _todoRepository.Remove(id);
+            return new NoContentResult();
+        }
+
     }
 }

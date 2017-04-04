@@ -10,5 +10,8 @@ namespace WebApi_firstApp.Models
         public long Key { get; set; }
         public string Name { get; set; }
         public bool IsComplete { get; set; }
+        public long AuthorId { get; set; }
+        [ForeignKey("AuthorId")]
+        public virtual AuthorTodo Author { get; set; }
     }
 }

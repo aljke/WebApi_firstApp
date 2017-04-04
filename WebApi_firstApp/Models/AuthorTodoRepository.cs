@@ -15,6 +15,7 @@ namespace WebApi_firstApp.Models
 
             if(_context.Authors.Count() == 0)
                 _context.Authors.Add(new AuthorTodo { Name = "Author 1"});
+            _context.SaveChanges();
         }
 
         public void Add(AuthorTodo item)

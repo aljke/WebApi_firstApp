@@ -14,7 +14,8 @@ namespace WebApi_firstApp.Models
             _context = context;
 
             if (_context.TodoItems.Count() == 0)
-                Add(new TodoItem { Name = "Item1" });
+                Add(new TodoItem { Name = "Item1", AuthorId = 2 });
+            _context.SaveChanges();
         }
 
         public IEnumerable<TodoItem> GetAll()

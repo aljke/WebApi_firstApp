@@ -14,5 +14,6 @@ namespace WebApi_firstApp.Models
         }
 
         public DbSet<TodoItem> TodoItems { get; set; }
+        public DbSet<AuthorTodo> Authors { get; set; }
     }
 }

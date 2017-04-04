@@ -34,6 +34,7 @@ namespace WebApi_firstApp
             // Add framework services.
             services.AddMvc();
             services.AddScoped<ITodoRepository, TodoRepository>();
+            services.AddScoped<IAuthorTodoRepository, AuthorTodoRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
